@@ -43,10 +43,7 @@
     "dirSecurityGroupName": "[concat(parameters('dnsNamePrefix'), '-dir-sg')]",
     "masterAsName":"asmaster",
     "workerAsName":"asworker",
-    "edgeAsName":"asedge",
-    "customScriptCommand":"su -c'sh",
-    "scriptName":"initialize-director-server.sh",
-    "scriptClose":"'"
+    "edgeAsName":"asedge"
   },
   "resources": [
     {
@@ -257,7 +254,7 @@
           ]
         },
         "protectedSettings":{
-          "commandToExecute": "[concat(variables('customScriptCommand'),' ',variables('scriptName'),' ', parameters('vmSpec').adminUsername,' ', parameters('dnsNameSuffix'),' ', parameters('networkSpec').directorServerIPAddress,' ',parameters('vmSpec').dbUsername,' ', parameters('vmSpec').dbPassword,' ', parameters('userInfo').company,' ', parameters('userInfo').emailAddress,' ',parameters('userInfo').businessPhone,' ', parameters('userInfo').firstName,' ', parameters('userInfo').lastName,' ', parameters('userInfo').jobRole, ' ', parameters('userInfo').jobFunction,' ',parameters('clusterParameters').dirUsername,' ',  parameters('clusterParameters').dirPassword,' ',variables('scriptClose'))]"
+          "commandToExecute": "[concat('sh initialize-director-server.sh ',' ', variables('singleQuote'), parameters('vmSpec').adminUsername, variables('singleQuote'), ' ', variables('singleQuote'), parameters('dnsNameSuffix'), variables('singleQuote'), ' ', variables('singleQuote'), parameters('networkSpec').directorServerIPAddress, variables('singleQuote'), ' ', variables('singleQuote'), parameters('vmSpec').dbUsername, variables('singleQuote'), ' ', variables('singleQuote'), parameters('vmSpec').dbPassword, variables('singleQuote'), ' ', variables('singleQuote'), parameters('userInfo').company, variables('singleQuote'), ' ', variables('singleQuote'), parameters('userInfo').emailAddress, variables('singleQuote'), ' ', variables('singleQuote'), parameters('userInfo').businessPhone, variables('singleQuote'), ' ', variables('singleQuote'), parameters('userInfo').firstName, variables('singleQuote'), ' ', variables('singleQuote'), parameters('userInfo').lastName, variables('singleQuote'), ' ', variables('singleQuote'), parameters('userInfo').jobRole, variables('singleQuote'), ' ', variables('singleQuote'), parameters('userInfo').jobFunction, variables('singleQuote'), ' ', variables('singleQuote'), parameters('clusterParameters').dirUsername, variables('singleQuote'), ' ', variables('singleQuote'), parameters('clusterParameters').dirPassword, variables('singleQuote'))]"
         }
       }
     }
